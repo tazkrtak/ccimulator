@@ -14,7 +14,7 @@ export const TicketInput: React.FC<TicketInputProps> = ({
   onChange,
   onError,
 }) => {
-  const [value, setValue] = useState<string>();
+  const [pasted, setPasted] = useState<string>();
 
   useEffect(() => {
     document.onpaste = handleOnPaste;
@@ -36,7 +36,7 @@ export const TicketInput: React.FC<TicketInputProps> = ({
 
       const ticket = decodeTicket(qrData.text, onError);
       if (ticket) {
-        setValue(src);
+        setPasted(src);
         onChange(ticket);
       }
     } catch {
@@ -48,7 +48,7 @@ export const TicketInput: React.FC<TicketInputProps> = ({
     try {
       const ticket = decodeTicket(text, onError);
       if (ticket) {
-        setValue(text);
+        setPasted(text);
         onChange(ticket);
       }
     } catch (e) {
@@ -62,20 +62,20 @@ export const TicketInput: React.FC<TicketInputProps> = ({
       style={{
         width: size,
         height: size,
+        margin: 0,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        margin: 0,
         textAlign: 'center',
-        color: !value ? 'darkgray' : 'black',
+        color: !pasted ? 'darkgray' : 'black',
       }}
     >
-      {!value ? (
+      {!pasted ? (
         "Paste ticket's text or the QR code image here"
-      ) : value.startsWith('blob:') ? (
-        <Image src={value} width={size} height={size} />
+      ) : pasted.startsWith('blob:') ? (
+        <Image src={pasted} width={size} height={size} />
       ) : (
-        value
+        pasted
       )}
     </Text>
   );

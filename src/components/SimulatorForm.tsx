@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Button, Col, Row, Table, useToasts } from '@geist-ui/react';
+import {
+  Button,
+  Code,
+  Col,
+  Note,
+  Row,
+  Spacer,
+  Table,
+  useToasts,
+} from '@geist-ui/react';
 import { TicketInput } from './TicketInput';
 import { Ticket } from '../models/Ticket';
 import { useMutation } from 'react-query';
@@ -48,11 +57,12 @@ export const SimulatorForm: React.FC = () => {
             })
           }
         />
+        <Spacer y={1} />
+
         <Button
           disabled={!ticket}
           loading={purchaseMutation.isLoading}
           onClick={() => purchaseMutation.mutate()}
-          style={{ margin: 16 }}
         >
           Purchase
         </Button>
@@ -70,6 +80,12 @@ export const SimulatorForm: React.FC = () => {
           <Table.Column prop="prop" label="property" />
           <Table.Column prop="value" label="value" />
         </Table>
+
+        <Spacer y={1} />
+
+        <Note label={false}>
+          <Code>UserId:TOTP:Quantity:Price</Code> in Base64
+        </Note>
       </Col>
     </Row>
   );

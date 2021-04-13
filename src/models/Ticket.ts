@@ -9,7 +9,9 @@ export const decodeTicket = (
   code: string,
   onError: (err: string) => void,
 ): Ticket | null => {
-  if (!code.match(/.+:\d{6}:\d+:\d+/g)) {
+  const decoded = atob(code);
+
+  if (!decoded.match(/.+:\d{6}:\d+:\d+/g)) {
     onError(
       'Unsupported ticket format!\n' +
         'Expected Format: <UserId>:<TOTP>:<Quantity>:<Price>',
@@ -18,7 +20,7 @@ export const decodeTicket = (
     return null;
   }
 
-  const values = code.split(':');
+  const values = decoded.split(':');
   return {
     userId: values[0],
     totp: values[1],
