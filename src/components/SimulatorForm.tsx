@@ -1,12 +1,33 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { Button, Col, Row, Table, useToasts } from '@geist-ui/react';
 import { TicketInput } from './TicketInput';
 import { Ticket } from '../models/Ticket';
+import { useMutation } from 'react-query';
+
+const client = axios.create({
+  baseURL: 'https://tazkrtak-api-demo.herokuapp.com/',
+});
 
 export const SimulatorForm: React.FC = () => {
   const [ticket, setTicket] = useState<Ticket>();
-
   const [, setToast] = useToasts();
+
+  const purchaseMutation = useMutation(
+    () => client.post('tickets/purchase', ticket),
+    {
+      onSuccess: () =>
+        setToast({
+          text: 'Transaction created successfully!',
+          type: 'success',
+        }),
+      onError: ({ response: { data } }) =>
+        setToast({
+          text: data.message,
+          type: 'error',
+        }),
+    },
+  );
 
   return (
     <Row gap={3} justify="center" style={{ padding: 32 }}>
@@ -29,12 +50,8 @@ export const SimulatorForm: React.FC = () => {
         />
         <Button
           disabled={!ticket}
-          onClick={() =>
-            setToast({
-              text: JSON.stringify(ticket),
-              type: 'success',
-            })
-          }
+          loading={purchaseMutation.isLoading}
+          onClick={() => purchaseMutation.mutate()}
           style={{ margin: 16 }}
         >
           Purchase
