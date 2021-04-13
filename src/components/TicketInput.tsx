@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserQRCodeReader } from '@zxing/browser';
 import { Image, Text } from '@geist-ui/react';
+import { BrowserQRCodeReader } from '@zxing/browser';
 import { decodeTicket, Ticket } from '../models/Ticket';
 
 interface TicketInputProps {

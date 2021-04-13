@@ -9,22 +9,27 @@ export const decodeTicket = (
   code: string,
   onError: (err: string) => void,
 ): Ticket | null => {
-  const decoded = atob(code);
+  try {
+    const decoded = atob(code);
 
-  if (!decoded.match(/.+:\d{6}:\d+:\d+/g)) {
-    onError(
-      'Unsupported ticket format!\n' +
-        'Expected Format: <UserId>:<TOTP>:<Quantity>:<Price>',
-    );
+    if (!decoded.match(/.+:\d{6}:\d+:\d+/g)) {
+      onError(
+        'Unsupported ticket format!\n' +
+          'Expected Format: <UserId>:<TOTP>:<Quantity>:<Price>',
+      );
 
+      return null;
+    }
+
+    const values = decoded.split(':');
+    return {
+      userId: values[0],
+      totp: values[1],
+      quantity: +values[2],
+      price: +values[3],
+    };
+  } catch {
+    onError('Could not decode ticket value');
     return null;
   }
-
-  const values = decoded.split(':');
-  return {
-    userId: values[0],
-    totp: values[1],
-    quantity: +values[2],
-    price: +values[3],
-  };
 };
