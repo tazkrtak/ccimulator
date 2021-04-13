@@ -1,11 +1,12 @@
 {
-  "plugins": ["prettier"],
+  "plugins": ["react", "prettier"],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:prettier/recommended"
   ],
   "rules": {
+    "react/prop-types": "off",
     "prettier/prettier": "error"
   }
 }
