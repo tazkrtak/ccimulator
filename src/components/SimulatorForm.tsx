@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Button, Col, Row, Table } from '@geist-ui/react';
+import { Button, Col, Row, Table, useToasts } from '@geist-ui/react';
 import { TicketInput } from './TicketInput';
 import { Ticket } from '../models/Ticket';
 
 export const SimulatorForm: React.FC = () => {
   const [ticket, setTicket] = useState<Ticket>();
+
+  const [, setToast] = useToasts();
 
   return (
     <Row gap={3} justify="center" style={{ padding: 32 }}>
@@ -18,11 +20,21 @@ export const SimulatorForm: React.FC = () => {
         <TicketInput
           size={250}
           onChange={(t) => setTicket(t)}
-          onError={(err) => console.error(err)}
+          onError={(err) =>
+            setToast({
+              text: err,
+              type: 'error',
+            })
+          }
         />
         <Button
           disabled={!ticket}
-          onClick={() => console.log(ticket)}
+          onClick={() =>
+            setToast({
+              text: JSON.stringify(ticket),
+              type: 'success',
+            })
+          }
           style={{ margin: 16 }}
         >
           Purchase
