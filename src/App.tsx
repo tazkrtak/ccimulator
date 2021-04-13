@@ -1,45 +1,28 @@
 import React from 'react';
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+import { CssBaseline, GeistProvider, Page, Text } from '@geist-ui/react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { SimulatorForm } from './components/SimulatorForm';
 
 const queryClient = new QueryClient();
 
-export default function App() {
+export const App: React.FC = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Demo />
-    </QueryClientProvider>
+    <GeistProvider>
+      <CssBaseline />
+      <QueryClientProvider client={queryClient}>
+        <AppView />
+      </QueryClientProvider>
+    </GeistProvider>
   );
-}
+};
 
-interface IData {
-  name: string;
-  avatar_url: string;
-}
-
-interface IError {
-  message: string;
-}
-
-function Demo() {
-  const { isLoading, error, data } = useQuery<IData, IError>('repoData', () =>
-    fetch('https://api.github.com/orgs/tazkrtak').then((res) => res.json()),
-  );
-
-  if (isLoading) return <p>Loading...</p>;
-
-  if (error || data == undefined) return <p>{error?.message}</p>;
-
+export const AppView: React.FC = () => {
   return (
-    <div
-      style={{
-        padding: 64,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
-      <img src={data.avatar_url} />
-      <h1>{data.name}</h1>
-    </div>
+    <Page>
+      <Text h1 style={{ textAlign: 'center' }}>
+        CCimulator
+      </Text>
+      <SimulatorForm />
+    </Page>
   );
-}
+};

@@ -11,6 +11,9 @@
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
   },
   "dependencies": {
+    "@geist-ui/react": "^2.1.5",
+    "@zxing/browser": "^0.0.8",
+    "axios": "^0.21.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-query": "^3.13.6",
