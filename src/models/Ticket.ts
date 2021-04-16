@@ -12,12 +12,8 @@ export const decodeTicket = (
   try {
     const decoded = atob(code);
 
-    if (!decoded.match(/.+:\d{6}:\d+:\d+/g)) {
-      onError(
-        'Unsupported ticket format!\n' +
-          'Expected Format: <UserId>:<TOTP>:<Quantity>:<Price>',
-      );
-
+    if (!decoded.match(/^.+:\d{6}:\d+:\d+(\.\d+)?$/g)) {
+      onError('Unsupported ticket format!');
       return null;
     }
 
