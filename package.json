@@ -17,7 +17,8 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-query": "^3.13.6",
-    "react-scripts": "4.0.3"
+    "react-scripts": "4.0.3",
+    "skematic": "^5.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.4",

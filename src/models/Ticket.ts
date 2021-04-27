@@ -1,9 +1,23 @@
+import Skematic, { Model } from 'skematic';
+
 export interface Ticket {
   userId: string;
+  userKey: string;
   totp: string;
   quantity: number;
   price: number;
 }
+
+const schema: Model<Ticket> = {
+  userId: { required: true, rules: { isString: true } },
+  userKey: { required: true, rules: { isString: true } },
+  totp: {
+    required: true,
+    rules: { isString: true, minLength: 6, maxLength: 6 },
+  },
+  quantity: { required: true, rules: { isNumber: true, min: 1 } },
+  price: { required: true, rules: { isNumber: true, min: 3 } },
+};
 
 export const decodeTicket = (
   code: string,
@@ -11,21 +25,17 @@ export const decodeTicket = (
 ): Ticket | null => {
   try {
     const decoded = atob(code);
+    const ticket: Ticket = JSON.parse(decoded);
+    const result = Skematic.validate(schema, ticket);
 
-    if (!decoded.match(/^.+:\d{6}:\d+:\d+(\.\d+)?$/g)) {
-      onError('Unsupported ticket format!');
+    if (!result.valid) {
+      onError('Invalid JSON format');
       return null;
     }
 
-    const values = decoded.split(':');
-    return {
-      userId: values[0],
-      totp: values[1],
-      quantity: +values[2],
-      price: +values[3],
-    };
+    return ticket;
   } catch {
-    onError('Could not decode ticket value');
+    onError('Invalid base64 format');
     return null;
   }
 };

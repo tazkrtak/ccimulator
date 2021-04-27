@@ -63,6 +63,7 @@ export const TicketInput: React.FC<TicketInputProps> = ({
         width: size,
         height: size,
         margin: 0,
+        wordBreak: 'break-all',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
