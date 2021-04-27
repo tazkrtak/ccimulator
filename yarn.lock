@@ -10042,6 +10042,11 @@ sisteransi@^1.0.5:
   resolved "https://registry.yarnpkg.com/sisteransi/-/sisteransi-1.0.5.tgz#134d681297756437cc05ca01370d3a7a571075ed"
   integrity sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==
 
+skematic@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/skematic/-/skematic-5.0.0.tgz#36145b17e8914789b23c41228684511cb367821b"
+  integrity sha512-K664hH0A2Q5xiwxnx6+OyHG/jhAQqXq1eYqSuey5qGQQR0EswaEFf4s3ay6jskPpKGYzQo7Dh6oA3EVeR6/oHA==
+
 slash@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-3.0.0.tgz#6539be870c165adbd5240220dbe361f1bc4d4634"

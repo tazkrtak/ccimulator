@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Button,
-  Code,
-  Col,
-  Note,
-  Row,
-  Spacer,
-  Table,
-  useToasts,
-} from '@geist-ui/react';
+import { Button, Col, Row, Spacer, Table, useToasts } from '@geist-ui/react';
 import axios from 'axios';
 import { useMutation } from 'react-query';
 import { Ticket } from '../models/Ticket';
@@ -72,6 +63,7 @@ export const SimulatorForm: React.FC = () => {
         <Table
           data={[
             { prop: 'User Id', value: ticket?.userId },
+            { prop: 'User Key', value: ticket?.userKey },
             { prop: 'TOTP', value: ticket?.totp },
             { prop: 'Quantity', value: ticket?.quantity },
             { prop: 'Price', value: ticket?.price },
@@ -82,10 +74,6 @@ export const SimulatorForm: React.FC = () => {
         </Table>
 
         <Spacer y={1} />
-
-        <Note label={false}>
-          <Code>UserId:TOTP:Quantity:Price</Code> in Base64
-        </Note>
       </Col>
     </Row>
   );
