@@ -19,7 +19,7 @@ export const App: React.FC = () => {
 export const AppView: React.FC = () => {
   return (
     <Page>
-      <Text h1 style={{ textAlign: 'center' }}>
+      <Text h1 style={{ textAlign: 'center', marginBottom: 32 }}>
         CCimulator
       </Text>
       <SimulatorForm />
