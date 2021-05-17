@@ -16,6 +16,7 @@
     "axios": "^0.21.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-qr-reader": "^2.2.1",
     "react-query": "^3.13.6",
     "react-scripts": "4.0.3",
     "skematic": "^5.0.0"
@@ -28,6 +29,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@types/react-qr-reader": "^2.1.3",
     "eslint": "^7.24.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
