@@ -1,28 +1,39 @@
-import React from 'react';
-import { CssBaseline, GeistProvider, Page, Text } from '@geist-ui/react';
+import React, { useState } from 'react';
+import { Button, CssBaseline, GeistProvider, Page, Row } from '@geist-ui/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { SimulatorForm } from './components/SimulatorForm';
 
-const queryClient = new QueryClient();
-
 export const App: React.FC = () => {
-  return (
-    <GeistProvider>
-      <CssBaseline />
-      <QueryClientProvider client={queryClient}>
-        <AppView />
-      </QueryClientProvider>
-    </GeistProvider>
-  );
-};
+  const queryClient = new QueryClient();
+  const isOsDark = window?.matchMedia('(prefers-color-scheme: dark)')?.matches;
+  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(isOsDark);
 
-export const AppView: React.FC = () => {
   return (
-    <Page>
-      <Text h1 style={{ textAlign: 'center', marginBottom: 32 }}>
-        CCimulator
-      </Text>
-      <SimulatorForm />
-    </Page>
+    <QueryClientProvider client={queryClient}>
+      <GeistProvider themeType={isDarkTheme ? 'dark' : 'light'}>
+        <CssBaseline />
+        <Page dotBackdrop>
+          <Page.Header center style={{ paddingTop: 24 }}>
+            <h1>CCimulator</h1>
+          </Page.Header>
+
+          <Page.Content>
+            <SimulatorForm />
+          </Page.Content>
+
+          <Page.Footer style={{ padding: 12 }}>
+            <Row justify="center">
+              <Button
+                size="mini"
+                type="abort"
+                onClick={() => setIsDarkTheme(!isDarkTheme)}
+              >
+                {isDarkTheme ? 'Light Mode' : 'Dark Mode'}
+              </Button>
+            </Row>
+          </Page.Footer>
+        </Page>
+      </GeistProvider>
+    </QueryClientProvider>
   );
 };
